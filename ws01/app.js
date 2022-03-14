@@ -1,0 +1,24 @@
+const express = require('express');
+const app = express();
+const PORT = 3000;
+const stringArray = [
+  "There are 10 kinds of people. Those who knows binary and those who don\’t",
+  "Logic will get you from A to B. Imagination will take you everywhere.",
+  "There are two ways of constructing a software design. One way is to make it so simple that there are obviously no deficiencies and the other is to make it so complicated that there are no obvious deficiencies.",
+  "It\’s not that I\’m so smart, it\’s just that I stay with problems longer",
+  "It is pitch dark. You are likely to be eaten by a grue."
+  ];
+
+app.use(express.static(__dirname+'/public'));
+
+app.get('/', function (req, res) {
+  res.sendFile(__dirname+'/public/index.html');
+});
+
+app.listen(PORT, function () {
+  console.log(`Running Workshop01 app on port ${PORT} ...`);
+
+//  if (process.send) {
+//      process.send('online');
+//  }
+});
