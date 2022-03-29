@@ -1,0 +1,5 @@
+Steps for Workshop01 Task 1
+
+1) cd \cfdsa-workshop01\task1
+2) docker build -t dov-go-bear:v1 .
+3) docker run -d -p 5000:3000 -e INSTANCE_NAME="This is my dov-go-bear" -e INSTANCE_HASH=1234567890 dov-go-bear:v1
