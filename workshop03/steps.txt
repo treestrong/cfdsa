@@ -1,0 +1,7 @@
+Install and run metrics server
+1) kubectl apply -f metrics-server.yaml
+2) kubectl get po,deploy,svc -n kube-system
+3) kubectl top node 	[check top resources on nodes]
+4) kubectl top po -A    [check top resources on pods across all ns]
+
+
