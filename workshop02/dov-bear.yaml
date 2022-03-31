@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dov-pod
+spec:
+  containers:
+  - name: dov-container
+    image: stackupiss/dov-bear:v2
+    imagePullPolicy: IfNotPresent
+    ports:
+    - containerPort: 3000
