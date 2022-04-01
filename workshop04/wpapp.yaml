@@ -1,0 +1,58 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wpapp-deploy
+  labels:
+    name: wpapp-deploy
+spec:
+  replicas: 3
+  selector: 
+    matchLabels: 
+      name: wpapp-pod
+  strategy: 
+    type: RollingUpdate
+    rollingUpdate: 
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      name: wpapp-pod
+      labels:
+        name: wpapp-pod
+    spec:
+      containers:
+      - name: wpapp-container
+        image: wordpress:5.9.2
+        imagePullPolicy: IfNotPresent
+        envFrom:
+        - configMapRef:
+            name: wp-cm
+        - secretRef:
+            name: wp-secret
+        ports:
+        - name: wpapp-port
+          containerPort: 80
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 256Mi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wpapp-svc
+  labels: 
+    name: wpapp-svc
+spec:
+  type: ClusterIP
+  selector:
+    name: wpapp-pod
+  ports:
+  - port: 8080
+    targetPort: wpapp-port
+
